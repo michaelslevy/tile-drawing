@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en"">
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/styles.css">
+		<link href='http://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv/dist/html5shiv.js"></script>
+		<![endif]-->
+		
+		<style>
+			
+			* {
+				margin:0;
+				padding:0;
+			}
+			
+			body { font-family: 'Lora', 'Georgia', serif; color:#333;}
+			
+			h1 { font-size:1.5em; }
+			
+			p { 
+				margin-bottom:10px;
+				border-bottom:solid 1px #999; 
+				padding-bottom:10px; 
+			}
+					
+			nav img {
+				vertical-align:middle;
+				margin-right:20px;
+			}
+			
+			header {
+				background:#eee;
+				padding:10px 30px;
+			}
+			
+			nav {
+				background:#eee;
+				padding:10px 30px;
+				position:relative;
+				z-index:9;
+			}
+			
+			#content{
+				position:relative;
+			}
+			#content img {
+				position:absolute;
+				top:30px;
+				left:30px;
+			}
+			
+			.btn {
+				-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+				-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+				box-shadow:inset 0px 1px 0px 0px #fce2c1;
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #fb9e25) );
+				background:-moz-linear-gradient( center top, #ffc477 5%, #fb9e25 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25');
+				background-color:#ffc477;
+				-webkit-border-top-left-radius:20px;
+				-moz-border-radius-topleft:20px;
+				border-top-left-radius:20px;
+				-webkit-border-top-right-radius:20px;
+				-moz-border-radius-topright:20px;
+				border-top-right-radius:20px;
+				-webkit-border-bottom-right-radius:20px;
+				-moz-border-radius-bottomright:20px;
+				border-bottom-right-radius:20px;
+				-webkit-border-bottom-left-radius:20px;
+				-moz-border-radius-bottomleft:20px;
+				border-bottom-left-radius:20px;
+				text-indent:0;
+				border:1px solid #eeb44f;
+				display:inline-block;
+				color:#ffffff;
+				font-family:Arial;
+				font-size:15px;
+				font-weight:bold;
+				font-style:normal;
+				height:40px;
+				line-height:40px;
+				width:200px;
+				text-decoration:none;
+				text-align:center;
+				text-shadow:1px 1px 0px #cc9f52;
+			}
+			
+			.btn:hover {
+				background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477) );
+				background:-moz-linear-gradient( center top, #fb9e25 5%, #ffc477 100% );
+				filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477');
+				background-color:#fb9e25;
+			}
+			
+			.btn:active {
+				position:relative;
+				top:1px;
+			}
+			
+			
+		</style>
+	</head>
+	
+	<body>
+	
+		<header class='layout'>
+			
+			<h1>Girih Tile Drawing Tool</h1>
+			
+			<p><strong>Instructions:</strong>
+				Click on the tile palette to create a tile.
+				Drag it to position.
+				Space bar rotates tile.
+				Double click to remove.
+			</p>
+		
+			<nav>
+				<a href='#' class='decadon'><img src='images/decadon.png'></a>
+				<a href='#' class='hexagon'><img src='images/hexagon.png'></a>
+				<a href='#' class='diamond'><img src='images/diamond.png'></a>
+				<a href='#' class='pentagon'><img src='images/penatgon.png'></a>
+				<a href='#' class='bowtie'><img src='images/bowtie.png'></a>
+				<a href='#' class='Toggle_Boundaries btn'>Toggle Boundaries</a>
+				
+			</nav>
+			
+		</header>
+		
+	
+		<div id='content'>
+		</div>
+		
+		<script>
+		
+		$(document).ready(function(){	
+		
+			linesOn=1;
+			
+			$('nav .decadon').click(function(){
+				
+				$('.selected').removeClass('selected');
+				$('#content').append('<img  src="images/decadon.gif" class="decadon selected" width="141" data-rotate="0"  />' );
+				$('#content img').draggable();
+				toggle_lines();
+			});
+			
+			$('nav .hexagon').click(function(){
+				$('.selected').removeClass('selected');
+				$('#content').append('<img  src="images/hexagon.gif" class="hexagon selected" width="54" data-rotate="0"  />' );
+				$('#content img').draggable();
+				toggle_lines();
+			});
+						
+			$('nav .diamond').click(function(){
+				$('.selected').removeClass('selected');
+				$('#content').append('<img  src="images/diamond.gif" class="diamond selected" width="75" data-rotate="0"    />' );
+				$('#content img').draggable();
+				toggle_lines();
+			});
+
+			$('nav .pentagon').click(function(){
+				$('.selected').removeClass('selected');
+				$('#content').append('<img  src="images/pentagon.gif" class="pentagon selected" width="75" data-rotate="0"  />' );
+				$('#content img').draggable();
+				toggle_lines();
+			});
+			
+			$('nav .bowtie').click(function(){
+				$('.selected').removeClass('selected');
+				$('#content').append('<img  src="images/bowtie.gif" class="bowtie selected" width="87" data-rotate="0"  />' );
+				$('#content img').draggable();
+				toggle_lines();
+			
+			});	
+			
+			$('#content').delegate("img", "mousedown", function(){
+				$('.selected').removeClass('selected');
+				$(this).addClass('selected');
+			});				
+			
+			$('#content').delegate("img", "dblclick", function(){
+				$(this).remove();
+			});
+
+			$('.Toggle_Boundaries').click(function(){
+			
+				if(linesOn==0){linesOn=1;}else{linesOn=0;}
+				toggle_lines();
+
+			});
+			
+			function toggle_lines(){
+			
+				if(linesOn==0){
+				
+					$('#content .decadon').attr('src','images/decadon-a.gif');
+					$('#content .hexagon').attr('src','images/hexagon-a.gif');
+					$('#content .diamond').attr('src','images/diamond-a.gif');
+					$('#content .bowtie').attr('src','images/bowtie-a.gif');
+					$('#content .pentagon').attr('src','images/pentagon-a.gif');
+					
+				} else {
+				
+					$('#content .decadon').attr('src','images/decadon.gif');
+					$('#content .hexagon').attr('src','images/hexagon.gif');
+					$('#content .diamond').attr('src','images/diamond.gif');
+					$('#content .bowtie').attr('src','images/bowtie.gif');
+					$('#content .pentagon').attr('src','images/pentagon.gif');
+					
+				}
+				
+			}
+			
+			$(document).keypress(function(event) {
+				e= event.keyCode || event.which, arrow = {left: 37, up: 38, right: 39, down: 40 };
+				
+				console.log(e);
+				
+				switch(e){
+					case 32: //spacebar - rotate
+						rotation=parseInt($('.selected').attr('data-rotate'))+18;
+						$('.selected').attr('data-rotate',rotation);
+						$('.selected').css('transform','rotate('+rotation+'deg)');
+					break;
+
+					case 37: //nudge_left
+						var l=parseInt($('.selected').css('left'));
+						$('.selected').css('left',(l-1)+'px');
+					break;
+	
+					case 38: //nudge_up
+						var l=parseInt($('.selected').css('top'));
+						$('.selected').css('top',(l-1)+'px');
+					break;
+
+					case 39: //nudge_right
+						var l=parseInt($('.selected').css('left'));
+						$('.selected').css('left',(l+1)+'px');
+					break;
+					
+					case 40: //down
+						var l=parseInt($('.selected').css('top'));
+						$('.selected').css('top',(l+1)+'px');
+					break;
+					
+					case 43: // plus
+						var w=parseInt($('.selected').width());
+						$('.selected').width(w*2);
+					break;
+					
+					case 45: // minus
+						var w=parseInt($('.selected').width());
+						$('.selected').width(w*.5);
+					break;
+					
+				}
+				
+			});
+		
+		});
+	
+		</script>
+	
+	</body>
+
+</html>
